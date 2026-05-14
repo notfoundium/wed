@@ -2,4 +2,8 @@
 import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
-export default defineConfig({});
+// Подпуть проекта на GitHub Pages: https://notfoundium.github.io/wed/
+export default defineConfig({
+	site: "https://notfoundium.github.io",
+	base: "/wed",
+});
