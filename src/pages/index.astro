@@ -72,6 +72,14 @@ const rsvp = {
 			telegram: "https://t.me/notfoundium",
 		},
 	],
+	coordinator: {
+		intro:
+			"Накануне и в день свадьбы по организационным и срочным вопросам обращайтесь к нашему координатору:",
+		label: "Дарья",
+		phone: "+7 977 630-07-87",
+		telegram: "https://t.me/dariamaslakova",
+		vk: "https://vk.com/iddaria_maslakova",
+	},
 } as const;
 
 const dialHref = (phone: string) => `tel:${phone.replace(/[\s().-]/g, "")}`;
@@ -250,36 +258,67 @@ const decorTopSrc = assetUrl(decorTop);
 						Пожалуйста, подтвердите присутствие <strong>{rsvp.deadline}</strong> — напишите нам:
 					</p>
 
-					<div class="rsvp-grid">
-						{
-							rsvp.contacts.map((c) => (
-								<div class="rsvp-card">
-									<p class="rsvp-card__name">{c.label}</p>
-									<div class="rsvp-card__links">
-										<a
-											class="btn btn--outline btn--email"
-											href={`mailto:${c.email}?subject=RSVP свадьба`}
-										>
-											<span class="btn__email-text">{c.email}</span>
-										</a>
-										<a class="btn btn--outline" href={dialHref(c.phone)}>
-											{c.phone}
-										</a>
-										<a class="btn btn--outline" href={c.vk} target="_blank" rel="noopener noreferrer">
-											VK
-										</a>
-										<a
-											class="btn btn--outline"
-											href={c.telegram}
-											target="_blank"
-											rel="noopener noreferrer"
-										>
-											Telegram
-										</a>
+					<div class="rsvp-block">
+						<div class="rsvp-grid rsvp-grid--couple">
+							{
+								rsvp.contacts.map((c) => (
+									<div class="rsvp-card">
+										<p class="rsvp-card__name">{c.label}</p>
+										<div class="rsvp-card__links">
+											<a
+												class="btn btn--outline btn--email"
+												href={`mailto:${c.email}?subject=RSVP свадьба`}
+											>
+												<span class="btn__email-text">{c.email}</span>
+											</a>
+											<a class="btn btn--outline" href={dialHref(c.phone)}>
+												{c.phone}
+											</a>
+											<a class="btn btn--outline" href={c.vk} target="_blank" rel="noopener noreferrer">
+												VK
+											</a>
+											<a
+												class="btn btn--outline"
+												href={c.telegram}
+												target="_blank"
+												rel="noopener noreferrer"
+											>
+												Telegram
+											</a>
+										</div>
 									</div>
+								))
+							}
+						</div>
+
+						<div class="rsvp-coordinator">
+							<p class="block__star" aria-hidden="true">✦</p>
+							<p class="block__text block__text--center">{rsvp.coordinator.intro}</p>
+							<div class="rsvp-card">
+								<p class="rsvp-card__name">{rsvp.coordinator.label}</p>
+								<div class="rsvp-card__links">
+									<a class="btn btn--outline" href={dialHref(rsvp.coordinator.phone)}>
+										{rsvp.coordinator.phone}
+									</a>
+									<a
+										class="btn btn--outline"
+										href={rsvp.coordinator.telegram}
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										Telegram
+									</a>
+									<a
+										class="btn btn--outline"
+										href={rsvp.coordinator.vk}
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										VK
+									</a>
 								</div>
-							))
-						}
+							</div>
+						</div>
 					</div>
 				</section>
 
@@ -742,17 +781,35 @@ const decorTopSrc = assetUrl(decorTop);
 				margin-top: 0.1rem;
 			}
 
-			.block--details .rsvp-grid {
+			.rsvp-block {
+				width: 100%;
 				margin-top: 1.5rem;
+			}
+
+			.rsvp-coordinator {
+				width: 100%;
+				margin-top: 1.75rem;
+			}
+
+			.rsvp-coordinator .block__star {
+				margin-top: 0;
+			}
+
+			.rsvp-coordinator .rsvp-card {
+				width: 100%;
+				margin-top: 1rem;
+				box-sizing: border-box;
 			}
 
 			.rsvp-grid {
 				display: grid;
 				gap: 1rem;
+				grid-template-columns: 1fr;
+				width: 100%;
 			}
 
 			@media (min-width: 22rem) {
-				.rsvp-grid {
+				.rsvp-grid--couple {
 					grid-template-columns: 1fr 1fr;
 				}
 			}
